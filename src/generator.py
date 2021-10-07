@@ -10,8 +10,8 @@ Color = Union[float, Tuple[float, ...], str]
 class TextImageGenerator:
     font_filepath: str = "fonts/ipaexg.ttf"
     fontsize: int = 48
-    mx_ratio: float = 0.1
-    my_ratio: float = 0.1
+    px_ratio: float = 0.1
+    py_ratio: float = 0.1
 
     def generate(
         self,
@@ -29,11 +29,11 @@ class TextImageGenerator:
 
     def _get_canvas_size(self, text: str, font: ImageFont.FreeTypeFont) -> Tuple[Tuple[int, int], Tuple[int, int]]:
         text_width, text_height = ImageDraw.Draw(Image.new("RGB", (200, 200))).textsize(text, font)
-        width = int(text_width * (1 + 2 * self.mx_ratio))
-        height = int(text_height * (1 + 2 * self.my_ratio))
+        width = int(text_width * (1 + 2 * self.px_ratio))
+        height = int(text_height * (1 + 2 * self.py_ratio))
 
-        text_top_left_x = int(width * self.mx_ratio / (1 + 2 * self.mx_ratio))
-        text_top_left_y = int(height * self.my_ratio / (1 + 2 * self.my_ratio))
+        text_top_left_x = int(width * self.px_ratio / (1 + 2 * self.px_ratio))
+        text_top_left_y = int(height * self.py_ratio / (1 + 2 * self.py_ratio))
         return (width, height), (text_top_left_x, text_top_left_y)
 
     def _get_canvas(self, bg_color: Color, canvas_size: Tuple[int, int]) -> Image:
